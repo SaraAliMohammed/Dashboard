@@ -1,0 +1,125 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}">
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+</style>
+<br>
+
+
+<a href="{% url 'server_list' %}"> Servers </a><br>
+<a href="{% url 'mac_list' %}"> Macs </a><br>
+<br><br>
+<div class="container">
+<div class="row">
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 1</th>
+             </tr>
+             <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+             </tr>
+            {% for server in rac1Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 2</th>
+             </tr>
+            <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+             </tr>
+            {% for server in rac2Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 3</th>
+             </tr>
+            <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+            </tr>
+            {% for server in rac3Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div><br><br>
+<div class="row">
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 4</th>
+             </tr>
+            <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+            </tr>
+            {% for server in rac4Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 5</th>
+             </tr>
+            <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+            </tr>
+            {% for server in rac5Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table>
+            <tr style="background-color:#59adc6">
+                <th colspan="2">Rac 6</th>
+             </tr>
+            <tr style="background-color:#b2ddea">
+                <td>Name</td>
+                <td>RacNum</td>
+            </tr>
+            {% for server in rac6Servers %}
+                <tr>
+                    <td>{{server.name}}</td>
+                    <td>{{server.RacNum}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</div>

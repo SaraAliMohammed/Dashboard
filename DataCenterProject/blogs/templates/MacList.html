@@ -1,0 +1,13 @@
+<h1>Macs</h1>
+<ul>
+    {% for mac in object_list %}
+        <li>{{ mac.ServerID }}  :
+            <a href="{% url 'server_edit' mac.pk  %}"> {{ mac.MacNum }} </a>
+            <a href="{% url 'mac_edit' mac.pk %}"> edit </a>
+            <a href="{% url 'server_delete' mac.pk %}"> delete </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'mac_new' %}"> New Mac</a></br>
+<a href="{% url 'server_list' %}"> Servers </a>

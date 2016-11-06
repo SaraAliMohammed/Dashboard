@@ -1,0 +1,16 @@
+<h1>Servers</h1>{{test}}
+<ul>
+    {% for server in object_list %}
+        <li><h1>{{ server.name }} : </h1>  Type : {{server.Type}}, RAM : {{server.RAM}}, Core : {{server.Core}}, Storage : {{server.Storage}}, RacNum : {{server.RackNum}}
+            <a href="{% url 'server_edit' server.pk  %}">edit</a>
+            <a href="{% url 'server_delete' server.pk %}">delete</a>
+            <a href="{% url 'showServerMacs' server.pk %}"> Show Mac Numbers </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'server_new' %}">New Server</a><br>
+<a href="{% url 'mac_list' %}">Macs</a><br>
+<a href="{% url 'mac_new' %}">add Mac</a><br>
+<a href="{% url 'showRacServers' %}">show Rac Servers</a><br><br>
+{{ racServers_list }}
