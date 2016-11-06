@@ -842,58 +842,39 @@
                 type: 'GET',
                 url: 'edit/'+id,
                 success: function (response) {
-                    //var link =  $($.parseHTML(response)).find("#button");
-                    var link =  $($.parseHTML(response));
-                    link[0].baseURI='/edit/'+id;
-                    console.log(link);
-                    //alert(link[0].baseURI);
-                        $('#serverToolsContent').html(response);
+                    $('#serverToolsContent').html(response);
 
-                        /*$( "#test" ).dialog({
-                          autoOpen: false,
-                          show: {
-                            effect: "blind",
-                            duration: 1000
-                          },
-                          hide: {
-                            effect: "explode",
-                            duration: 1000
-                          }
-                        });
-                         $('#test').dialog( "open" );*/
+                    /*$( "#test" ).dialog({
+                      autoOpen: false,
+                      show: {
+                        effect: "blind",
+                        duration: 1000
+                      },
+                      hide: {
+                        effect: "explode",
+                        duration: 1000
+                      }
+                    });
+                     $('#test').dialog( "open" );*/
 
 
-                            var form=$('#form');
-                           form.submit(function(){
+                    var form=$('#form');
+                   form.submit(function(){
+                        $.ajax({
+                                data: form.serialize(),
+                                 type: form.attr('method'),
+                                 url: 'edit/'+id,
+                                 success: function (response) {
 
-                                //alert('dddd');
-                                //var form=$($.parseHTML(response));
-                                //console.log(form.find("#id_Type").attr('value'));
-                                //var $form = $(this);
-                                 //alert($form);
-                                 //name = form.find("#id_name").attr('value');
+                                    $('#serverToolsContent').html(response);
 
-                                 console.log(form.attr('method'));
-                                $.ajax({
-                                        data: form.serialize(),
-                                         type: form.attr('method'),
-                                         url: 'edit/'+id,
-                                         success: function (response) {
-
-                                            var t=$($.parseHTML(response));
-                                            console.log(response);
-                                            alert(response);
-                                            $('#serverToolsContent').html(response);
-
-                                         },
-                                        error: function(data) {
-                                            alert('error');
-                                        }
-                                    });
-                                   return false;
-                                  alert('ss');
-                           });
-
+                                 },
+                                error: function(data) {
+                                    alert('submit error');
+                                }
+                            });
+                           return false;
+                   });
                 }
             });
 
