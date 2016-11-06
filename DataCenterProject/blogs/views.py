@@ -74,42 +74,39 @@ def ServerCreateView(request, template_name='ServerForm.html'):
 def ServerUpdateView(request, pk, template_name='ServerForm.html'):
     server = get_object_or_404(Server, pk=pk)
     form = ServerForm(request.POST or None, instance=server)
-    test=server.name
 
     if request.method == 'POST' and request.is_ajax:
-        editedServer= get_object_or_404(Server, pk=pk)
-        editedForm=ServerForm(request.POST or None,instance=editedServer)
-
-        if editedForm.is_valid():
-            serverName = editedForm.cleaned_data.get('name')
+        if form.is_valid():
+            serverName = form.cleaned_data.get('name')
             try:
                 Server.objects.filter(name=pk).update(name=serverName)
                 Mac.objects.filter(ServerID=pk).update(ServerID=serverName)
-                editedForm.save()
-                test = 't'
+                form.save()
+                msg = 'server edited successfully'
             # if try to write name aleady exists
             except IntegrityError:
-                editedForm.save(commit=False)
-                test = 'e'
-            return redirect('server_list')
+                form.save(commit=False)
+                msg='This name is already exists'
+            return HttpResponse(msg)
         else:
             msg = 'error'
 
         return HttpResponse(msg)
 
-    if form.is_valid():
-        serverName = form.cleaned_data.get('name')
-        try:
-            Server.objects.filter(name=pk).update(name=serverName)
-            Mac.objects.filter(ServerID=pk).update(ServerID=serverName)
-            form.save()
-            test='t'
-        #if try to write name aleady exists
-        except IntegrityError:
-            form.save(commit=False)
-            test='e'
-        return redirect('server_list')
-    return render(request, template_name, {'form':form,'test':test,'server':server})
+    else:
+        if form.is_valid():
+            serverName = form.cleaned_data.get('name')
+            try:
+                Server.objects.filter(name=pk).update(name=serverName)
+                Mac.objects.filter(ServerID=pk).update(ServerID=serverName)
+                form.save()
+
+            #if try to write name aleady exists
+            except IntegrityError:
+                form.save(commit=False)
+
+            return redirect('server_list')
+        return render(request, template_name, {'form':form})
 
 def ServerDeleteView(request, pk, template_name='ServerConfirmDelete.html'):
     server = get_object_or_404(Server, pk=pk)
