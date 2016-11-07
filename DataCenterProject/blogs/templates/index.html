@@ -145,7 +145,12 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Servers</h2>
-                    <h3 class="section-subheading text-muted">We have {{serversCount}} servers.</h3>
+                    <h3 class="section-subheading text-muted">We have {{serversCount}} servers.
+                    <a href="#serverTools" class="createServer" id="createServer" data-toggle="modal">
+                        <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
+                    </a>
+                    </h3>
+
                 </div>
             </div>
             <div class="row">
@@ -175,6 +180,7 @@
             </div>
         </div>
     </section>
+
     <div id="deleteServer-confirm" title="Delete Server?" >
       <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This server will be permanently deleted with its related data and cannot be recovered. Are you sure?</p>
     </div>
@@ -275,7 +281,7 @@
                                     </div>
                                 </div>
 
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
+                                <button type="button" class="btn btn-primary" onclick="location.reload();"><i class="fa fa-times"></i> Close </button>
                             </div>
                         </div>
                     </div>
@@ -943,6 +949,44 @@
             });
 
         });
+
+
+        $('#createServer').click(function () {
+            event.preventDefault();
+            var csrf_token = $("#csrf_token").val();
+            $.ajax({
+                data: {
+                    csrfmiddlewaretoken: ('{{csrf_token}}'),
+                },
+                type: 'GET',
+                url: 'new',
+                success: function (response) {
+                    $('#serverToolsContent').html(response);
+                    var form=$('#form');
+
+                    form.submit(function(){
+                        event.preventDefault();
+                        $.ajax({
+                                data: form.serialize(),
+                                 type: form.attr('method'),
+                                 url: 'new',
+                                 success: function (response) {
+
+                                    //$('#serverToolsContent').html(response);
+                                    //location.reload();
+
+                                 },
+                                error: function(data) {
+                                    alert('submit error');
+                                }
+                            });
+                        return false;
+                    });
+                }
+            });
+
+        });
+
 
     </script>
 </body>

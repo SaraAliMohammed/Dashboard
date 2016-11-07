@@ -24,18 +24,19 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="931" column="52" selection-start-line="931" selection-start-column="52" selection-end-line="931" selection-end-column="52" />
+            <state relative-caret-position="429">
+              <caret line="974" column="38" selection-start-line="974" selection-start-column="38" selection-end-line="974" selection-end-column="38" />
               <folding>
                 <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#4386#5474#0" expanded="false" />
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#span#0;n#p#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#span#0;n#p#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="e#12715#17525#0" expanded="false" />
+                <element signature="e#12957#17767#0" expanded="false" />
                 <element signature="n#section#1;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#section#2;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -65,13 +66,14 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="122" column="35" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+            <state relative-caret-position="216">
+              <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#4116#4186#0" expanded="false" />
-                <element signature="e#5956#6385#0" expanded="false" />
-                <element signature="e#6415#7074#0" expanded="false" />
+                <element signature="e#2432#3714#0" expanded="false" />
+                <element signature="e#4317#4387#0" expanded="false" />
+                <element signature="e#6157#6586#0" expanded="false" />
+                <element signature="e#6616#7275#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -674,9 +676,10 @@
           <caret line="5" column="28" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#4116#4186#0" expanded="false" />
-            <element signature="e#5956#6385#0" expanded="false" />
-            <element signature="e#6415#7074#0" expanded="false" />
+            <element signature="e#2432#3714#0" expanded="false" />
+            <element signature="e#4317#4387#0" expanded="false" />
+            <element signature="e#6157#6586#0" expanded="false" />
+            <element signature="e#6616#7275#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -922,6 +925,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/templates/ServerConfirmDelete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DataCenterProject/DataCenterProject/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -938,41 +949,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/templates/ServerConfirmDelete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="122" column="35" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+        <state relative-caret-position="216">
+          <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#4116#4186#0" expanded="false" />
-            <element signature="e#5956#6385#0" expanded="false" />
-            <element signature="e#6415#7074#0" expanded="false" />
+            <element signature="e#2432#3714#0" expanded="false" />
+            <element signature="e#4317#4387#0" expanded="false" />
+            <element signature="e#6157#6586#0" expanded="false" />
+            <element signature="e#6616#7275#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataCenterProject/blogs/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="931" column="52" selection-start-line="931" selection-start-column="52" selection-end-line="931" selection-end-column="52" />
+        <state relative-caret-position="429">
+          <caret line="974" column="38" selection-start-line="974" selection-start-column="38" selection-end-line="974" selection-end-column="38" />
           <folding>
             <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#4386#5474#0" expanded="false" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#span#0;n#p#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#span#0;n#p#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#12715#17525#0" expanded="false" />
+            <element signature="e#12957#17767#0" expanded="false" />
             <element signature="n#section#1;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#section#2;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />

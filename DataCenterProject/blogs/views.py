@@ -66,10 +66,15 @@ def ServerListView(request, template_name='ServerList.html'):
 
 def ServerCreateView(request, template_name='ServerForm.html'):
     form = ServerForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('server_list')
-    return render(request, template_name, {'form':form})
+    if request.method == 'POST' and request.is_ajax:
+        if form.is_valid():
+            form.save()
+            msg = "Server created successfully."
+            return HttpResponse(msg)
+        else:
+            return render(request, template_name, {'form':form})
+    else:
+        return render(request, template_name, {'form':form})
 
 def ServerUpdateView(request, pk, template_name='ServerForm.html'):
     server = get_object_or_404(Server, pk=pk)
