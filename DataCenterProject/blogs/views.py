@@ -108,12 +108,20 @@ def ServerUpdateView(request, pk, template_name='ServerForm.html'):
             return redirect('server_list')
         return render(request, template_name, {'form':form})
 
-def ServerDeleteView(request, pk, template_name='ServerConfirmDelete.html'):
+'''def ServerDeleteView(request, pk, template_name='ServerConfirmDelete.html'):
     server = get_object_or_404(Server, pk=pk)
     if request.method=='POST':
         server.delete()
         return redirect('server_list')
-    return render(request, template_name, {'object':server})
+    return render(request, template_name, {'object':server})'''
+
+def ServerDeleteView(request, pk):
+    server = get_object_or_404(Server, pk=pk)
+    msg = 'not deleted'
+    if request.method=='POST':
+        server.delete()
+        msg = 'deleted successfully'
+    return HttpResponse(msg)
 
 
 
