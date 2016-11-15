@@ -1,11 +1,13 @@
 from builtins import print
+
+
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.shortcuts import render
 
 # Create your views here.
 
 from django.shortcuts import render_to_response
-from .models import Server,Mac,Rac
+from .models import Server,Mac,Rack
 import json
 from django.core import serializers
 from django.http import HttpResponse
@@ -49,6 +51,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.db import IntegrityError
 
+
 class ServerForm(ModelForm):
     class Meta:
         model = Server
@@ -59,7 +62,7 @@ def ServerListView(request, template_name='ServerList.html'):
     servers = Server.objects.all()
     data = {}
     data['object_list'] = servers
-    '''form = RacServers(request.POST or None)
+    '''form = RackServers(request.POST or None)
         if form.is_valid():
             data['RackNum'] = form.cleaned_data.get('RackNum')'''
     return render(request, template_name, data)
@@ -68,11 +71,16 @@ def ServerCreateView(request, template_name='ServerForm.html'):
     form = ServerForm(request.POST or None)
     if request.method == 'POST' and request.is_ajax:
         if form.is_valid():
+            errors = ""
             form.save()
             msg = "Server created successfully."
             return HttpResponse(msg)
         else:
+            #errors = form.errors
+            #form = ServerForm()
+        #return HttpResponse(json.dumps(errors))
             return render(request, template_name, {'form':form})
+            #return redirect('/new')
     else:
         return render(request, template_name, {'form':form})
 
@@ -120,6 +128,8 @@ def ServerUpdateView(request, pk, template_name='ServerForm.html'):
         return redirect('server_list')
     return render(request, template_name, {'object':server})'''
 
+
+
 def ServerDeleteView(request, pk):
     server = get_object_or_404(Server, pk=pk)
     msg = 'not deleted'
@@ -129,7 +139,10 @@ def ServerDeleteView(request, pk):
     return HttpResponse(msg)
 
 
-
+def ServerDetailsView(request,pk, template_name='ServerDetails.html'):
+    if request.is_ajax:
+        server = get_object_or_404(Server,pk=pk)
+        return render(request, template_name, {'server':server})
 #------------------Mac----------------------------------
 class MacForm(ModelForm):
     class Meta:
@@ -163,64 +176,64 @@ def ShowServerMacsView(request, pk, template_name='MacList.html'):
     serverMacs = Mac.objects.filter(ServerID=pk).all()
     return render(request, template_name, {'object_list':serverMacs})
 
-def ShowRacServersView(request, template_name='RacServers.html'):
-    rac1Servers = Server.objects.filter(RackNum=1)
-    rac2Servers = Server.objects.filter(RackNum=2)
-    rac3Servers = Server.objects.filter(RackNum=3)
-    rac4Servers = Server.objects.filter(RackNum=4)
-    rac5Servers = Server.objects.filter(RackNum=5)
-    rac6Servers = Server.objects.filter(RackNum=6)
+def ShowRackServersView(request, template_name='RackServers.html'):
+    Rack1Servers = Server.objects.filter(RackNum=1)
+    Rack2Servers = Server.objects.filter(RackNum=2)
+    Rack3Servers = Server.objects.filter(RackNum=3)
+    Rack4Servers = Server.objects.filter(RackNum=4)
+    Rack5Servers = Server.objects.filter(RackNum=5)
+    Rack6Servers = Server.objects.filter(RackNum=6)
 
     context = {
-        'rac1Servers' : rac1Servers,
-        'rac2Servers' :rac2Servers,
-        'rac3Servers': rac3Servers,
-        'rac4Servers': rac4Servers,
-        'rac5Servers': rac5Servers,
-        'rac6Servers': rac6Servers,
+        'Rack1Servers' : Rack1Servers,
+        'Rack2Servers' :Rack2Servers,
+        'Rack3Servers': Rack3Servers,
+        'Rack4Servers': Rack4Servers,
+        'Rack5Servers': Rack5Servers,
+        'Rack6Servers': Rack6Servers,
     }
     return render(request, template_name, context)
 
 #----------------- index ------------------------------
 def oldIndexView(request):
-    racsObjects=Rac.objects.all()
-    racsNumbers=[]
-    racServers = []
+    RacksObjects=Rack.objects.all()
+    RacksNumbers=[]
+    RackServers = []
     MacNumbers=Mac.objects.all()
-    for rac in racsObjects:
-        racServers.append(Server.objects.filter(RackNum=rac.RackNum))
-        racsNumbers.append(rac.RackNum)
+    for R in RacksObjects:
+        RackServers.append(Server.objects.filter(RackNum=R.RackNum))
+        RacksNumbers.append(R.RackNum)
 
-    racsNumbers.sort()
+    RacksNumbers.sort()
 
     context = {
-        'RacsNum': racsNumbers,
-        'racs':racServers,
+        'RacksNum': RacksNumbers,
+        'Racks':RackServers,
         'MacNumbers':MacNumbers
     }
     return render(request, 'oldIndex.html',context)
 
 def indexView(request):
-    racsObjects=Rac.objects.all()
-    racsNumbers=[]
-    racServers = []
+    RacksObjects=Rack.objects.all()
+    RacksNumbers=[]
+    RackServers = []
     MacNumbers=Mac.objects.all()
-    for rac in racsObjects:
-        racServers.append(Server.objects.filter(RackNum=rac.RackNum))
-        racsNumbers.append(rac.RackNum)
+    for R in RacksObjects:
+        RackServers.append(Server.objects.filter(RackNum=R.RackNum))
+        RacksNumbers.append(R.RackNum)
 
-    racsNumbers.sort()
+    RacksNumbers.sort()
 
     Servers = Server.objects.all()
     serversCount = len(Servers)
-    editServerForm=ServerForm(request.POST or None)
+    RacksCount=len(Rack.objects.all())
     context = {
-        'RacsNum' : racsNumbers,
-        'racs' : racServers,
+        'RacksNum' : RacksNumbers,
+        'Racks' : RackServers,
         'MacNumbers' : MacNumbers,
         'serversCount' : serversCount,
         'Servers' : Servers,
-        'editServerForm':editServerForm
+        'RacksCount':RacksCount,
     }
     return render(request, 'index.html',context)
 

@@ -223,18 +223,18 @@ height:100%
                     <h1 id="rac">r</h1>
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2" >
-                            <h1>Racs</h1>
+                            <h1>Racks</h1>
                             <div id="tabs">
                                 <ul>
-                                    {% for RackNum in RacsNum %}
+                                    {% for RackNum in RacksNum %}
                                         <li><a href="#tab{{RackNum}}">Rac {{RackNum}}</a></li>
                                     {% endfor %}
                                 </ul>
-                                {% for RackNum in RacsNum %}
+                                {% for RackNum in RacksNum %}
                                     <div id="tab{{RackNum}}">
-                                        {% for rac in racs %}
+                                        {% for Rack in Racks %}
                                             <div id="accordion" class="accordion">
-                                                {% for server in rac %}
+                                                {% for server in Rack %}
                                                     {% if server.RackNum.RackNum ==  RackNum %}
                                                         <h3>{{server.name}}</h3>
                                                         <div>
@@ -260,7 +260,7 @@ height:100%
                                                 {% endfor %}
                                             </div>
                                         {% endfor %}
-                                        to apply the function on every div not only first time
+                                        <!--to apply the function on every div not only first time-->
                                         <script>
                                             $( function() {
                                                 $( ".accordion" ).accordion({

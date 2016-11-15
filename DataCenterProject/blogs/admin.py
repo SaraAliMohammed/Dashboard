@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Server , Mac, Rac
+from .models import Server , Mac, Rack
 
 class ServerAdmin(admin.ModelAdmin):
     list_display = ["name","Type" , "RAM" , "Core" , "Storage" , "Rac"]
@@ -21,8 +21,8 @@ class MacAdmin(admin.ModelAdmin):
 class RacAdmin(admin.ModelAdmin):
     list_display = ["RackNum"]
     class Meta:
-        model=Rac
+        model=Rack
 
 admin.site.register(Server,ServerAdmin)
 admin.site.register(Mac,MacAdmin)
-admin.site.register(Rac,RacAdmin)
+admin.site.register(Rack,RacAdmin)

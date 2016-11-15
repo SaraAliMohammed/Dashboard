@@ -57,6 +57,18 @@
        // visibility : hidden
      //}
 
+     //style for rack tabs\
+
+  .ui-tabs-vertical { width: 55em; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block;width:100% }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left; }
+  #tabs ul li a{background-color:white;color:black}
+    #tabs h2{align:center}
+
+
     </style>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -86,6 +98,9 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#server">Servers</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#rack">Racks</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">About</a>
@@ -291,6 +306,108 @@
     </div>
 
     <!-- --------------- end Servers ----------------------------------------------------------------------------- -->
+
+    <!------------------ Racks ----------------------------------------------------------------------------------- -->
+    <section id="rack" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Racks</h2>
+                    <h3 class="section-subheading text-muted">We have {{RacksCount}} racks.
+                    <a href="#serverTools" class="createServer" data-toggle="modal">
+                        <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
+                    </a>
+                    </h3>
+
+                </div>
+            </div>
+            <div class="row" id="tabs">
+
+                <div class="col-md-4 col-sm-6">
+                    <ul>
+                        {% for RackNum in RacksNum %}
+                            <li><a href="#tabs-{{RackNum}}" onclick="$('#serverInRackDetails').html('');">Rack{{RackNum}}<img src="{% static 'img/rack.jpg' %}" style="width:80%;height:50px;border:0"></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                 <div class="col-md-8 col-sm-6">
+                     {% for RackNum in RacksNum %}
+                         <div id="tabs-{{RackNum}}" class="row">
+                             <h2>Rack{{RackNum}}</h2>
+                            <!--{% for Rack in Racks %}
+                                    <div id="accordion" class="accordion">
+                                        {% for server in Rack %}
+                                            {% if server.RackNum.RackNum ==  RackNum %}
+                                                <h3>{{server.name}}</h3>
+                                                <div>
+                                                    <ul>
+                                                        <li><h5>Name : {{server.name}}</h5></li>
+                                                        <li><h5>Type : {{server.Type}}</h5></li>
+                                                        <li><h5>Core : {{server.Core}}</h5></li>
+                                                        <li><h5>RAM : {{server.RAM}}</h5></li>
+                                                        <li><h5>Storage : {{server.Storage}}</h5></li>
+                                                        <li><h5> MacNumbers :
+                                                                <ul>
+                                                                    {% for mac in MacNumbers %}
+                                                                        {% if server.name == mac.ServerID.name %}
+                                                                            <li>{{mac.MacNum}}</li>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </h5>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                             {% endfor %}-->
+                             {% for Rack in Racks %}
+                                    {% for server in Rack %}
+                                        {% if server.RackNum.RackNum ==  RackNum %}
+                                            <div class="col-md-4">
+                                                <button type="button" onclick="showServerDetails('{{server}}')">
+                                                    <h6>{{server.name}}</h6>
+                                                    <img src="{% static 'img/server.png' %}" width="100%">
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                         </div>
+                     {% endfor %}
+                      <div class="row">
+                            <div class="col-md-12" id="serverInRackDetails">
+
+                            </div>
+                      </div>
+                </div>
+
+
+
+                    <!--{% for RackNum in RacksNum %}
+                        <div id="accordion" class="accordion">
+                            <h3 style="background-image:url('{% static 'img/rack.jpg' %}');">{{RackNum}}<img src="{% static 'img/rack.jpg' %}" style="height:5%;width:80%"></h3>
+                            <div>
+                                {% for Rack in Racks %}
+                                    {% for server in Rack %}
+                                        {% if server.RackNum.RackNum ==  RackNum %}
+                                            <button type="button">
+                                                <h6>{{server.name}}</h6>
+                                                <img src="{% static 'img/server.png' %}" width="100%">
+                                            </button>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    {% endfor %}-->
+
+            </div>
+        </div>
+    </section>
+    <!------------------ endRacks -------------------------------------------------------------------------------- -->
 
     <!-- server Grid Section -->
     <!--<section id="server" class="bg-light-gray">
@@ -835,7 +952,28 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
     <script>
+
+        $('#deleteServer-message').dialog({
+          autoOpen: false,
+          modal: true,
+          buttons: {
+            Ok: function() {
+              $( this ).dialog( "close" );
+              location.reload();
+            }
+          }
+        });
+
+        $( "#deleteServer-confirm" ).dialog({
+              autoOpen: false,
+              resizable: false,
+              height: "auto",
+              width: 400,
+              modal: true,
+
+        });
         $('.btnd').click(function () {
             var id = $(this).attr('id');
             var csrf_token = $("#csrf_token").val();
@@ -911,13 +1049,8 @@
             var idText = $(this).attr('id');
             var id = idText.split('delete')[1];
             var csrf_token = $("#csrf_token").val();
-            console.log(id);
-            //$( "#deleteServer-confirm" ).attr("visibility" ,"visible");
             $( "#deleteServer-confirm" ).dialog({
-              resizable: false,
-              height: "auto",
-              width: 400,
-              modal: true,
+
               buttons: {
                 "Delete all items": function() {
                   $( this ).dialog( "close" );
@@ -930,15 +1063,7 @@
                         type: 'POST',
                         url: 'delete/'+id,
                         success: function (response) {
-                            $('#deleteServer-message').dialog({
-                              modal: true,
-                              buttons: {
-                                Ok: function() {
-                                  $( this ).dialog( "close" );
-                                  location.reload();
-                                }
-                              }
-                            });
+                            $('#deleteServer-message').dialog( "open" );
                         }
                     });
                 },
@@ -946,7 +1071,9 @@
                   $( this ).dialog( "close" );
                 }
               }
-            });
+        });
+            $( "#deleteServer-confirm" ).dialog("open");
+
 
         });
 
@@ -970,9 +1097,22 @@
                                 data: form.serialize(),
                                  type: form.attr('method'),
                                  url: 'new',
-                                 success: function (response) {
 
-                                    //$('#serverToolsContent').html(response);
+                                 success: function (response) {
+                                    if(response=="Server created successfully.")
+                                    {
+                                        alert('done');
+                                        $('#serverToolsContent').html(response);
+                                    }
+                                   /* else
+                                    {
+                                        var errors = $.parseJSON(response);
+
+
+                                        console.log(form);
+                                    }*/
+
+                                    $('#serverToolsContent').html(response);
                                     //location.reload();
 
                                  },
@@ -988,7 +1128,44 @@
         });
 
 
+
     </script>
+  <script>
+
+  $( function() {
+    $( ".accordion" ).accordion({
+      collapsible: true,
+      active: false
+    });
+  } );
+   $( function() {
+    $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+  } );
+
+
+     /*$('#serverInRackDetailsButton').click(function(){
+            alert('ff');
+        });*/
+
+    function showServerDetails(server)
+    {
+        console.log(server);
+        $.ajax({
+            data: {
+
+            },
+            type: 'GET',
+            url: 'serverDetails/'+server,
+            success: function (response) {
+                $('#serverInRackDetails').html(response);
+            }
+        });
+    }
+
+
+
+  </script>
 </body>
 
 </html>

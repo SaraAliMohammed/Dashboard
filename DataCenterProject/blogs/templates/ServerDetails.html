@@ -1,0 +1,40 @@
+
+<h2>{{server.name}}</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Name:</th>
+    <td>{{server.name}}</td>
+  </tr>
+    <tr>
+    <th>RackNum:</th>
+    <td>{{server.RackNum}}</td>
+  </tr>
+    <tr>
+    <th>Type:</th>
+    <td>{{server.Type}}</td>
+  </tr>
+    <tr>
+    <th>Core:</th>
+    <td>{{server.Core}}</td>
+  </tr>
+    <tr>
+    <th>RAM:</th>
+    <td>{{server.RAM}}</td>
+  </tr>
+    <tr>
+    <th>Storage:</th>
+    <td>{{server.Storage}}</td>
+  </tr>
+  <tr>
+    <th rowspan="">MacNumbers:</th>
+    <td>
+        {% for mac in MacNumbers %}
+            {% if server.name == mac.ServerID.name %}
+               {{mac.MacNum}}<br>
+            {% endif %}
+        {% endfor %}
+    </td>
+  </tr>
+
+</table>

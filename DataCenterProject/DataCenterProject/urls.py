@@ -33,10 +33,11 @@ urlpatterns = [
     url(r'^newMac$', 'blogs.views.AddMacToServerView', name='mac_new'),
     url(r'^editMac/(?P<pk>[\w ]+)$', 'blogs.views.UpdateMacView', name='mac_edit'),
     url(r'^showServerMacs/(?P<pk>[\w ]+)$', 'blogs.views.ShowServerMacsView', name='showServerMacs'),
-    url(r'^showRacServers$', 'blogs.views.ShowRacServersView', name='showRacServers'),
+    url(r'^showRacServers$', 'blogs.views.ShowRackServersView', name='showRacServers'),
     url(r'^index$', 'blogs.views.oldIndexView', name='index'),
     url(r'^oldIndex$', 'blogs.views.ServerListView', name='server_list'),
     url(r'^test$', 'blogs.views.test', name='test'),
+    url(r'^serverDetails/(?P<pk>[\w ]+)$', 'blogs.views.ServerDetailsView', name='server_details'),
 
 ]
 if settings.DEBUG:
