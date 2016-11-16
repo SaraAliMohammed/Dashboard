@@ -59,15 +59,61 @@
 
      //style for rack tabs\
 
-  .ui-tabs-vertical { width: 55em; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block;width:100% }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left; }
+
+
+  .tabs{width: 55em;display: table;}
+   .tabsUl {padding: .2em .1em .2em .2em; float: left; width: 90; }
+   .tabsLi{clear: left; width: 100%; border-bottom-width: 1px !important; margin: 0 -1px .2em 0;}
+.tabsLi.ui-tabs-active{ padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+.tabsLi a{display:block; }
+
   #tabs ul li a{background-color:white;color:black}
     #tabs h2{align:center}
 
+.tabsRack {
+ display: flex;
+ flex-wrap: wrap; // make sure it wraps
+}
+.tabsRack label {
+ order: 1; // Put the labels first
+ display: block;
+ padding: 1rem 2rem;
+ margin-right: 0.2rem;
+ cursor: pointer;
+  background: #90CAF9;
+  font-weight: bold;
+  transition: background ease 0.2s;
+}
+.tabsRack .tab {
+  order: 99; // Put the tabs last
+  flex-grow: 1;
+ width: 100%;
+ display: none;
+  padding: 1rem;
+  background: #fff;
+}
+.tabsRack input[type="radio"] {
+ position: absolute;
+ opacity: 0;
+}
+.tabsRack input[type="radio"]:checked + label {
+ background: #fff;
+}
+.tabsRack input[type="radio"]:checked + label + .tab {
+ display: block;
+}
+
+@media (max-width: 45em) {
+  .tabsRack .tab,
+  .tabsRack label {
+    order: initial;
+  }
+  .tabs label {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 0.2rem;
+  }
+}
 
     </style>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -307,6 +353,7 @@
 
     <!-- --------------- end Servers ----------------------------------------------------------------------------- -->
 
+
     <!------------------ Racks ----------------------------------------------------------------------------------- -->
     <section id="rack" class="bg-light-gray">
         <div class="container">
@@ -321,12 +368,12 @@
 
                 </div>
             </div>
-            <div class="row" id="tabs">
+            <div class="row tabs" id="tabs" >
 
                 <div class="col-md-4 col-sm-6">
-                    <ul>
+                    <ul class="tabsUl">
                         {% for RackNum in RacksNum %}
-                            <li><a href="#tabs-{{RackNum}}" onclick="$('#serverInRackDetails').html('');">Rack{{RackNum}}<img src="{% static 'img/rack.jpg' %}" style="width:80%;height:50px;border:0"></a></li>
+                            <li class="tabsLi"><a href="#tabs-{{RackNum}}" onclick="$('#serverInRackDetails').html('');"><span>Rack{{RackNum}}</span><img src="{% static 'img/rack.jpg' %}" style="width:70%;height:100px;border:0"></a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -362,18 +409,40 @@
                                         {% endfor %}
                                     </div>
                              {% endfor %}-->
-                             {% for Rack in Racks %}
-                                    {% for server in Rack %}
-                                        {% if server.RackNum.RackNum ==  RackNum %}
-                                            <div class="col-md-4">
-                                                <button type="button" onclick="showServerDetails('{{server}}')">
-                                                    <h6>{{server.name}}</h6>
-                                                    <img src="{% static 'img/server.png' %}" width="100%">
-                                                </button>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
+                             <div class="tabsRack">
+                              <input type="radio" name="tabs" id="tabone{{RackNum}}" checked="checked">
+                              <label for="tabone{{RackNum}}">Servers</label>
+                              <div class="tab row">
+                                  {% for Rack in Racks %}
+                                        {% for server in Rack %}
+                                            {% if server.RackNum.RackNum ==  RackNum %}
+                                                <div class="col-md-4">
+                                                    <button type="button" onclick="showServerDetails('{{server}}')">
+                                                        <h6>{{server.name}}</h6>
+                                                        <img src="{% static 'img/server.png' %}" width="100%">
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                     {% endfor %}
+
+                              </div>
+
+                              <input type="radio" name="tabs" id="tabtwo{{RackNum}}">
+                              <label for="tabtwo{{RackNum}}">Information</label>
+                              <div class="tab">
+                                <h1>Tab Two Content</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                              </div>
+
+                              <input type="radio" name="tabs" id="tabthree{{RackNum}}">
+                              <label for="tabthree{{RackNum}}">Tab Three</label>
+                              <div class="tab">
+                                <h1>Tab Three Content</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                              </div>
+                            </div>
+
                          </div>
                      {% endfor %}
                       <div class="row">
@@ -1139,8 +1208,8 @@
     });
   } );
    $( function() {
-    $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+    $( "#tabs" ).tabs({collapsible: true});
+    $( ".tabsRackContent" ).tabs({collapsible: true});
   } );
 
 
